@@ -5,6 +5,13 @@
     </button>
     <ion-title>Speakers</ion-title>
   </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-searchbar color="primary"
+                   [(ngModel)]="queryText"
+                   (ionInput)="updateSchedule()"
+                   placeholder="Search">
+    </ion-searchbar>
+  </ion-toolbar>  
 </ion-header>
 
 <ion-content class="outer-content speaker-list">
@@ -31,7 +38,7 @@
                 </button>
 
                 <button ion-item (click)="goToSpeakerDetail(speaker)">
-                  <h3>About {{speaker.name}}</h3>
+                  
                 </button>
               </ion-list>
             </ion-card-content>
@@ -42,23 +49,17 @@
                   <ion-icon name="logo-twitter"></ion-icon>
                   Tweet
                 </button>
-              </ion-col>
-              <ion-col col-12 col-lg-auto text-center>
+                <button ion-button clear small color="primary" icon-start (click)="openContact(speaker)">
+                  <ion-icon name='chatboxes'></ion-icon>
+                  Contact
+                </button>
                 <button ion-button clear small color="primary" icon-start (click)="openSpeakerShare(speaker)">
                   <ion-icon name='share-alt'></ion-icon>
                   Share
                 </button>
               </ion-col>
-              <ion-col col-12 col-lg-auto text-center text-lg-right>
-                <button ion-button clear small color="primary" icon-start (click)="openContact(speaker)">
-                  <ion-icon name='chatboxes'></ion-icon>
-                  Contact
-                </button>
-              </ion-col>
             </ion-row>
-
           </ion-card>
-
         </ion-col>
       </ion-row>
     </ion-grid>
