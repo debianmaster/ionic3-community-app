@@ -32,7 +32,7 @@
         "@ionic/storage": "2.0.1",
         "cordova-android": "^6.2.3",
         "cordova-browser": "^4.1.0",
-        "cordova-ios": "4.3.1",
+        "cordova-ios": "^4.3.1",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-facebook4": "^1.9.1",
