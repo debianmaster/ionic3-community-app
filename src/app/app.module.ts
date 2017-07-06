@@ -28,7 +28,7 @@ import { SupportPage } from '../pages/support/support';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
-
+import { Facebook } from '@ionic-native/facebook';
 
 @NgModule({
   declarations: [
@@ -93,7 +93,8 @@ import { UserData } from '../providers/user-data';
     ConferenceData,
     UserData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    Facebook
   ]
 })
 export class AppModule { }

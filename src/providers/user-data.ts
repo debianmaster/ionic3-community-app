@@ -69,4 +69,8 @@ export class UserData {
       return value;
     });
   };
+  
+  setUserData(data: any): void{
+    this.storage.set('data', data);
+  }
 }
