@@ -9,7 +9,9 @@ import { UserOptions } from '../../interfaces/user-options';
 
 import { TabsPage } from '../tabs/tabs';
 import { SignupPage } from '../signup/signup';
-import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
+//import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
+import {  AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
  
 @Component({
   selector: 'page-user',
@@ -18,8 +20,18 @@ import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
 export class LoginPage {
   login: UserOptions = { username: '', password: '' };
   submitted = false;
-  constructor(public navCtrl: NavController, public userData: UserData,private fb: Facebook) { }
+  constructor(
+    public navCtrl: NavController, public userData: UserData,
+  //private fb: Facebook,
+  private afAuth: AngularFireAuth) { }
 
+  signInWithFacebook() {
+    
+    this.afAuth.auth
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .then(res => console.log(res));
+  }
+  /*
   loginWithFB(){
       this.fb.login(['email','public_profile']).then((response: FacebookLoginResponse) => {
         console.log(response);
@@ -27,7 +39,7 @@ export class LoginPage {
             this.userData.setUserData({email: profile['email'], first_name: profile['first_name'], picture: profile['picture_large']['data']['url'], username: profile['name']});
         });
       });
-  }
+  } */
   onLogin(form: NgForm) {
     this.submitted = true;
 

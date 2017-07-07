@@ -8,14 +8,20 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
+import { AngularFireDatabase ,FirebaseListObservable} from 'angularfire2/database';
+
 
 @Injectable()
 export class ConferenceData {
   data: any;
+  shoppingItems: FirebaseListObservable<any[]>;
+  constructor(public http: Http, public user: UserData,public afd: AngularFireDatabase) { }
 
-  constructor(public http: Http, public user: UserData) { }
+  load2(): any {
+    this.shoppingItems = this.afd.list('/') 
+  }
 
-  load(): any {
+   load(): any {
     if (this.data) {
       return Observable.of(this.data);
     } else {

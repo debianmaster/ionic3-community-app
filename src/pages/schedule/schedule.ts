@@ -13,6 +13,7 @@ import { UserData } from '../../providers/user-data';
 
 import { SessionDetailPage } from '../session-detail/session-detail';
 import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { FirebaseListObservable } from 'angularfire2/database';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class SchedulePage {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
+  shoppingItems: FirebaseListObservable<any[]>;
 
   constructor(
     public alertCtrl: AlertController,
@@ -57,6 +59,7 @@ export class SchedulePage {
     this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
       this.shownSessions = data.shownSessions;
       this.groups = data.groups;
+      this.shoppingItems=this.confData.shoppingItems;
     });
   }
 

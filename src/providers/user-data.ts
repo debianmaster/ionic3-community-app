@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+//import {  AngularFireAuth } from 'angularfire2/auth';
+//import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserData {
@@ -29,6 +30,13 @@ export class UserData {
       this._favorites.splice(index, 1);
     }
   };
+ 
+
+
+  signOut() {
+    //this.afAuth.auth.signOut();
+  }
+
 
   login(username: string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);

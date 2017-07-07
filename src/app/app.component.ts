@@ -9,7 +9,7 @@ import { AboutPage } from '../pages/about/about';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 //import { MapPage } from '../pages/map/map';
-import { SignupPage } from '../pages/signup/signup';
+//import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
@@ -55,7 +55,7 @@ export class ConferenceApp {
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
-    { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
+    //{ title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
   ];
   rootPage: any;
 
@@ -82,7 +82,7 @@ export class ConferenceApp {
 
     // load the conference data
     confData.load();
-
+    confData.load2();
     // decide which menu items should be hidden by current login status stored in local storage
     this.userData.hasLoggedIn().then((hasLoggedIn) => {
       this.enableMenu(hasLoggedIn === true);
