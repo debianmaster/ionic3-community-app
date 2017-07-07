@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Events, MenuController, Nav, Platform } from 'ionic-angular';
+import { Events, MenuController, Nav, Platform,ToastController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Storage } from '@ionic/storage';
@@ -8,8 +8,6 @@ import { Storage } from '@ionic/storage';
 import { AboutPage } from '../pages/about/about';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
-//import { MapPage } from '../pages/map/map';
-import { SignupPage } from '../pages/signup/signup';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
@@ -51,7 +49,7 @@ export class ConferenceApp {
     { title: 'Account', name: 'AccountPage', component: AccountPage, icon: 'person' },
     { title: 'Support', name: 'SupportPage', component: SupportPage, icon: 'help' },
     { title: 'Logout', name: 'TabsPage', component: TabsPage, icon: 'log-out', logsOut: true },
-    { title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
+    //{ title: 'Signup', name: 'SignupPage', component: SignupPage, icon: 'person-add' }
   ];
   loggedOutPages: PageInterface[] = [
     { title: 'Login', name: 'LoginPage', component: LoginPage, icon: 'log-in' },
@@ -67,8 +65,30 @@ export class ConferenceApp {
     public platform: Platform,
     public confData: ConferenceData,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    public toast: ToastController
   ) {
+
+    events.subscribe('todo:comingsoon', () => {
+        this.toast.create({
+          message: 'Coming Soon!!',
+          duration: 600
+        }).present();
+    });
+
+    events.subscribe('user:loggedin', () => {
+        this.toast.create({
+          message: 'Login successfull, Please update you account info.',
+          duration: 600
+        }).present();
+    });
+
+    events.subscribe('user:updateProfile', () => {
+        this.toast.create({
+          message: 'Profile Updated',
+          duration: 600
+        }).present();
+    });
 
     // Check if the user has already seen the tutorial
     this.storage.get('hasSeenTutorial')
@@ -124,6 +144,10 @@ export class ConferenceApp {
   openTutorial() {
     this.nav.setRoot(TutorialPage);
   }
+
+   comingSoon(){
+     this.events.publish('todo:comingsoon');
+   }
 
   listenToLoginEvents() {
     this.events.subscribe('user:login', () => {

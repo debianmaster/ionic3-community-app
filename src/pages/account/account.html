@@ -24,13 +24,24 @@
         </ion-item>
 
         <ion-item>
+          <ion-label>Status</ion-label>
+          <ion-select [(ngModel)]="profile.isSingle">
+             <ion-option value="0">Select</ion-option>
+             <ion-option value="-1">Single</ion-option>
+             <ion-option value="1">Married</ion-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
           <ion-label stacked>Occupation</ion-label>
           <ion-input type="text" [(ngModel)]="profile.occupation"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label stacked>District</ion-label>
-          <ion-input type="text" [(ngModel)]="profile.district"></ion-input>
+          <ion-select [(ngModel)]="profile.district">
+            <ion-option *ngFor="let item of districts">{{item}}</ion-option>
+          </ion-select>
         </ion-item>
 
         <ion-item>
@@ -38,12 +49,13 @@
           <ion-input type="text" [(ngModel)]="profile.mandal"></ion-input>
         </ion-item>
 
+        <!--
         <ion-item>
           <ion-label stacked>State</ion-label>
           <ion-input type="text" [(ngModel)]="profile.state"></ion-input>
         </ion-item>
-
-        <button ion-button full color="success" (click)="updateProfile(profile.occupation,profile.district,profile.mandal,profile.state,profile.phoneNumber)">Update</button>
+        -->
+        <button ion-button full color="success" (click)="updateProfile(profile)">Update</button>
       </ion-list>
     </ion-card-content>
   </ion-card>    

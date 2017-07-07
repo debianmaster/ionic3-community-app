@@ -28,7 +28,7 @@ export class ConferenceData {
     }); */
   }
   public getMembers(){
-    return this.afd.list('/members');
+    return this.afd.list('/userProfile');
   }
 
   load(){

@@ -35,7 +35,7 @@ export class SchedulePage {
   groups: any = [];
   confDate: string;
   posts: FirebaseListObservable<any[]>;
-  members: FirebaseListObservable<any[]>;
+  
 
   constructor(
     public alertCtrl: AlertController,
@@ -51,7 +51,7 @@ export class SchedulePage {
   ionViewDidLoad() {
     this.app.setTitle('Schedule');
     this.posts=this.confData.getPosts();
-    this.members=this.confData.getMembers();
+    
   }
 
 

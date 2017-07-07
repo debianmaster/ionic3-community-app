@@ -33,6 +33,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { GlobalProvider } from '../providers/global/global';
 
 
 
@@ -112,7 +113,8 @@ const firebaseConfig = {
     UserData,
     InAppBrowser,
     SplashScreen,
-    Facebook
+    Facebook,
+    GlobalProvider
   ]
 })
 export class AppModule { }

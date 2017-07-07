@@ -13,7 +13,7 @@ import { ConferenceData } from '../../providers/conference-data';
 
 import { SessionDetailPage } from '../session-detail/session-detail';
 import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
-
+import { FirebaseListObservable } from 'angularfire2/database';
 // TODO remove
 export interface ActionSheetButton {
   text?: string;
@@ -29,7 +29,8 @@ export interface ActionSheetButton {
 })
 export class SpeakerListPage {
   actionSheet: ActionSheet;
-  speakers: any[] = [];
+  //speakers: any[] = [];
+  speakers: FirebaseListObservable<any[]>;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -37,7 +38,10 @@ export class SpeakerListPage {
     public confData: ConferenceData,
     public config: Config,
     public inAppBrowser: InAppBrowser
-  ) {}
+  ) {
+     this.speakers=this.confData.getMembers();
+     console.log(this.speakers);
+  }
 
   ionViewDidLoad() {
     

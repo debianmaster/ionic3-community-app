@@ -5,6 +5,7 @@
     </button>
     <ion-title>Members</ion-title>
   </ion-navbar>
+  <!--
   <ion-toolbar no-border-top>
     <ion-searchbar color="primary"
                    [(ngModel)]="queryText"
@@ -12,37 +13,37 @@
                    placeholder="Search">
     </ion-searchbar>
   </ion-toolbar>  
+  -->
 </ion-header>
 
 <ion-content class="outer-content speaker-list">
-  <ion-list [virtualScroll]="speakers">
+  <ion-list [virtualScroll]="(speakers | async)">
     <ion-grid fixed>
       <ion-row align-items-stretch>
 
         <ion-col col-12 col-md-6 align-self-stretch align-self-center *virtualItem="let speaker" approxItemHeight="457px">
-
           <ion-card class="speaker-card">
-            <ion-card-header>
-              <button ion-item detail-none (click)="goToSpeakerDetail(speaker)">
-                <ion-avatar item-start>
-                  <img [src]="speaker.profilePic" alt="Speaker profile pic">
-                </ion-avatar>
-                {{speaker.name}}
-              </button>
-            </ion-card-header>
-
-            <ion-card-content class="outer-content">
-              <ion-list>
-                <button ion-item *ngFor="let session of speaker.sessions" (click)="goToSessionDetail(session)">
-                  <h3>{{session.name}}</h3>
-                </button>
-
-                <button ion-item (click)="goToSpeakerDetail(speaker)">
-                  
-                </button>
-              </ion-list>
+             <ion-item>
+              <ion-avatar item-start>
+                <img [src]="speaker.userInfo.photoURL">
+              </ion-avatar>
+              <h2>{{speaker.userInfo.displayName}}</h2>
+              <p>{{speaker.userInfo.gender}} -  {{speaker.occupation}}</p>
+            </ion-item>
+            <ion-card-content>
+                <ion-row>
+                  <ion-col>
+                    &nbsp;
+                  </ion-col>
+                  <ion-col>
+                    dist: {{speaker.district}}
+                  </ion-col>
+                  <ion-col>
+                    mdl: {{speaker.mandal}}
+                  </ion-col> 
+                </ion-row>
             </ion-card-content>
-
+            <!--
             <ion-row no-padding>
               <ion-col col-12 col-lg-auto text-center text-lg-left>
                 <button ion-button clear small color="primary" icon-start (click)="goToSpeakerTwitter(speaker)">
@@ -59,6 +60,7 @@
                 </button>
               </ion-col>
             </ion-row>
+            -->
           </ion-card>
         </ion-col>
       </ion-row>
