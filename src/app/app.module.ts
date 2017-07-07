@@ -30,6 +30,21 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { Facebook } from '@ionic-native/facebook';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBi2ljKtDDP5QcxKx_KJuXyOdpightOpnE",
+    authDomain: "akys-e7ebe.firebaseapp.com",
+    databaseURL: "https://akys-e7ebe.firebaseio.com",
+    projectId: "akys-e7ebe",
+    storageBucket: "akys-e7ebe.appspot.com",
+    messagingSenderId: "99995798085"
+  };
+
 @NgModule({
   declarations: [
     ConferenceApp,
@@ -51,6 +66,9 @@ import { Facebook } from '@ionic-native/facebook';
   imports: [
     BrowserModule,
     HttpModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs' },
@@ -65,7 +83,7 @@ import { Facebook } from '@ionic-native/facebook';
         { component: SupportPage, name: 'SupportPage', segment: 'support' },
         { component: LoginPage, name: 'LoginPage', segment: 'login' },
         { component: AccountPage, name: 'AccountPage', segment: 'account' },
-        { component: SignupPage, name: 'SignupPage', segment: 'signup' }
+        //{ component: SignupPage, name: 'SignupPage', segment: 'signup' }
       ]
     }),
     IonicStorageModule.forRoot()

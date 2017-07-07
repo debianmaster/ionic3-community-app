@@ -2,19 +2,24 @@ import { Injectable } from '@angular/core';
 
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-
+//import {  AngularFireAuth } from 'angularfire2/auth';
+//import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
-
+  userProfile: any;
   constructor(
     public events: Events,
     public storage: Storage
   ) {}
 
+  getUserDetails(uid: string){
+    //return this.afd.list('/userDetails');
+    return uid;
+  }
   hasFavorite(sessionName: string): boolean {
     return (this._favorites.indexOf(sessionName) > -1);
   };
@@ -29,6 +34,13 @@ export class UserData {
       this._favorites.splice(index, 1);
     }
   };
+ 
+
+
+  signOut() {
+    //this.afAuth.auth.signOut();
+  }
+
 
   login(username: string): void {
     this.storage.set(this.HAS_LOGGED_IN, true);
@@ -71,6 +83,8 @@ export class UserData {
   };
   
   setUserData(data: any): void{
+    console.log(data);
     this.storage.set('data', data);
+    this.login('test');
   }
 }

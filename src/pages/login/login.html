@@ -8,9 +8,8 @@
 </ion-header>
 
 <ion-content>
-	
-
 	<form #loginForm="ngForm" novalidate>
+		<!-- 
 		<ion-list no-lines>
 			<ion-item>
 				<ion-label stacked color="primary">Username</ion-label>
@@ -40,9 +39,10 @@
 				<button ion-button (click)="onSignup()" color="light" block>Signup</button>
 			</ion-col>
 		</ion-row>
+		-->
 		<ion-row responsive-sm>
 			<ion-col>
-				<button ion-button full (click)="loginWithFB()" color="primary" block>Fb Login</button>
+				<button ion-button full (click)="signInWithFacebook()" color="google" block><ion-icon name="logo-facebook"></ion-icon> &nbsp;Login</button>
 			</ion-col>
 		</ion-row>
 	</form>
