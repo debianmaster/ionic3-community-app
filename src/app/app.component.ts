@@ -115,28 +115,19 @@ export class ConferenceApp {
 
   openPage(page: PageInterface) {
     let params = {};
-
-    // the nav component was found using @ViewChild(Nav)
-    // setRoot on the nav to remove previous pages and only have this page
-    // we wouldn't want the back button to show in this scenario
+    console.log(page);
     if (page.index) {
       params = { tabIndex: page.index };
     }
-
-    // If we are already on tabs just change the selected tab
-    // don't setRoot again, this maintains the history stack of the
-    // tabs even if changing them from the menu
     if (this.nav.getActiveChildNav() && page.index != undefined) {
       this.nav.getActiveChildNav().select(page.index);
-    // Set the root of the nav with params if it's a tab index
-  } else {
+    } else {
       this.nav.setRoot(page.name, params).catch((err: any) => {
         console.log(`Didn't set nav root: ${err}`);
       });
     }
 
     if (page.logsOut === true) {
-      // Give the menu time to close before changing to logged out
       this.userData.logout();
     }
   }
