@@ -99,7 +99,7 @@ const firebaseConfig = {
     SchedulePage,
     ScheduleFilterPage,
     SessionDetailPage,
-    //SignupPage,
+    SignupPage,
     SpeakerDetailPage,
     SpeakerListPage,
     TabsPage,

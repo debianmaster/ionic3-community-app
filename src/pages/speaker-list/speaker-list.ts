@@ -40,9 +40,7 @@ export class SpeakerListPage {
   ) {}
 
   ionViewDidLoad() {
-    this.confData.getSpeakers().subscribe((speakers: any[]) => {
-      this.speakers = speakers;
-    });
+    
   }
 
   goToSessionDetail(session: any) {

@@ -5,10 +5,10 @@ import { NavController } from 'ionic-angular';
 
 import { UserData } from '../../providers/user-data';
 
-import { UserOptions } from '../../interfaces/user-options';
+ //import { UserOptions } from '../../interfaces/user-options';
 
 import { TabsPage } from '../tabs/tabs';
-import { SignupPage } from '../signup/signup';
+import { AccountPage } from '../account/account';
 //import { Facebook,FacebookLoginResponse } from '@ionic-native/facebook';
 import {  AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
@@ -18,7 +18,7 @@ import * as firebase from 'firebase/app';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  login: UserOptions = { username: '', password: '' };
+  //login: UserOptions = { username: '', password: '' };
   submitted = false;
   constructor(
     public navCtrl: NavController, public userData: UserData,
@@ -29,7 +29,10 @@ export class LoginPage {
     
     this.afAuth.auth
       .signInWithPopup(new firebase.auth.FacebookAuthProvider())
-      .then(res => console.log(res));
+      .then(res => {
+        this.userData.setUserData(res.additionalUserInfo.profile);
+        this.navCtrl.push(AccountPage);
+      });
   }
   /*
   loginWithFB(){
@@ -40,16 +43,16 @@ export class LoginPage {
         });
       });
   } */
-  onLogin(form: NgForm) {
+  onLogin(form: NgForm) { //not used
     this.submitted = true;
 
     if (form.valid) {
-      this.userData.login(this.login.username);
+      //this.userData.login(this.user.);
       this.navCtrl.push(TabsPage);
     }
   }
 
-  onSignup() {
-    this.navCtrl.push(SignupPage);
+  onSignup() { //not used
+    this.navCtrl.push(AccountPage);
   }
 }

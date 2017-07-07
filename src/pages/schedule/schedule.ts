@@ -34,7 +34,8 @@ export class SchedulePage {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
-  shoppingItems: FirebaseListObservable<any[]>;
+  posts: FirebaseListObservable<any[]>;
+  members: FirebaseListObservable<any[]>;
 
   constructor(
     public alertCtrl: AlertController,
@@ -49,20 +50,14 @@ export class SchedulePage {
 
   ionViewDidLoad() {
     this.app.setTitle('Schedule');
-    this.updateSchedule();
+    this.posts=this.confData.getPosts();
+    this.members=this.confData.getMembers();
   }
 
-  updateSchedule() {
-    // Close any open sliding items when the schedule updates
-    this.scheduleList && this.scheduleList.closeSlidingItems();
 
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.shownSessions = data.shownSessions;
-      this.groups = data.groups;
-      this.shoppingItems=this.confData.shoppingItems;
-    });
+  updateSchedule(){
+    
   }
-
   presentFilter() {
     let modal = this.modalCtrl.create(ScheduleFilterPage, this.excludeTracks);
     modal.present();
@@ -70,7 +65,7 @@ export class SchedulePage {
     modal.onWillDismiss((data: any[]) => {
       if (data) {
         this.excludeTracks = data;
-        this.updateSchedule();
+        
       }
     });
 
@@ -128,7 +123,7 @@ export class SchedulePage {
           handler: () => {
             // they want to remove this session from their favorites
             this.user.removeFavorite(sessionData.name);
-            this.updateSchedule();
+            //this.updateSchedule();
 
             // close the sliding item and hide the option buttons
             slidingItem.close();
@@ -152,21 +147,6 @@ export class SchedulePage {
   }
 
   doRefresh(refresher: Refresher) {
-    this.confData.getTimeline(this.dayIndex, this.queryText, this.excludeTracks, this.segment).subscribe((data: any) => {
-      this.shownSessions = data.shownSessions;
-      this.groups = data.groups;
-
-      // simulate a network request that would take longer
-      // than just pulling from out local json file
-      setTimeout(() => {
-        refresher.complete();
-
-        const toast = this.toastCtrl.create({
-          message: 'Sessions have been updated.',
-          duration: 3000
-        });
-        toast.present();
-      }, 1000);
-    });
+    console.log(refresher);
   }
 }

@@ -10,12 +10,16 @@ export class UserData {
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
-
+  userProfile: any;
   constructor(
     public events: Events,
     public storage: Storage
   ) {}
 
+  getUserDetails(uid: string){
+    //return this.afd.list('/userDetails');
+    return uid;
+  }
   hasFavorite(sessionName: string): boolean {
     return (this._favorites.indexOf(sessionName) > -1);
   };
@@ -79,6 +83,8 @@ export class UserData {
   };
   
   setUserData(data: any): void{
+    console.log(data);
     this.storage.set('data', data);
+    this.login('test');
   }
 }
