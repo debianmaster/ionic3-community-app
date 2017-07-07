@@ -8,19 +8,16 @@
 </ion-header>
 
 <ion-content padding class="appBackground">
+  <div padding-top text-center *ngIf="user">
+    <img src="{{user.photoURL}}" alt="avatar">
+    <h2>{{user.email}}</h2>
+    <h2>{{user.displayName}}</h2>
+    <h2>{{user.phoneNumber}}</h2>
+    <h2>{{user.gender}}</h2>
+  </div>
   <ion-card>
     <ion-card-content>
       <ion-list>
-        <ion-item>
-          <ion-label stacked>Name</ion-label>
-          <ion-input type="text" [(ngModel)]="user.displayName"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label stacked>Email</ion-label>
-          <ion-input type="text" [(ngModel)]="user.email"></ion-input>
-        </ion-item>
-
         <ion-item>
           <ion-label stacked>Phone</ion-label>
           <ion-input type="text" [(ngModel)]="profile.phoneNumber"></ion-input>
@@ -46,9 +43,8 @@
           <ion-input type="text" [(ngModel)]="profile.state"></ion-input>
         </ion-item>
 
-        <button ion-button full color="success" (click)="updateProfile(profile.occupation,profile.district,profile.mandal,profile.state)">Update</button>
+        <button ion-button full color="success" (click)="updateProfile(profile.occupation,profile.district,profile.mandal,profile.state,profile.phoneNumber)">Update</button>
       </ion-list>
     </ion-card-content>
-  </ion-card>
-     
+  </ion-card>    
 </ion-content>

@@ -13,21 +13,28 @@ export class AccountPage {
   public userProfile:firebase.database.Reference;
   public user: any;
   public profile: any = {
-
+        occupation:'',
+        district:'',
+        mandal:'',
+        state:'',
+        phoneNumber:''
   }
   constructor(public alertCtrl: AlertController, public nav: NavController, public userData: UserData) {
-      firebase.auth().onAuthStateChanged( (user:any) => {
-        if (user){
-          this.userProfile = firebase.database().ref(`/userProfile/${user.uid}`);
-          console.log(this.userProfile);
-          this.user = user;
-        }
-      });
+      this.user=firebase.auth().currentUser;
+      console.log(this.profile);
+      if (this.user){
+        this.userProfile = firebase.database().ref(`/userProfile/${this.user.uid}`);
+        console.log(this.userProfile);
+      }
   }
 
   ngAfterViewInit() {
      this.getUserProfile().on('value', (userProfileSnapshot:any) => {
-      this.profile = userProfileSnapshot.val();
+      console.log("get",userProfileSnapshot.val());
+      if(undefined!=userProfileSnapshot.val()){
+        this.profile = userProfileSnapshot.val();
+      }
+      
     });
   }
 
@@ -36,7 +43,7 @@ export class AccountPage {
   }
 
   updateProfile(occupation: string,district: string,mandal: string,state: string,phoneNumber: string): firebase.Promise<void> {
-    console.log(occupation,district,mandal,state);
+    console.log(occupation,district,mandal,state,phoneNumber);
     return this.userProfile.update({
         occupation:occupation,
         district:district,
