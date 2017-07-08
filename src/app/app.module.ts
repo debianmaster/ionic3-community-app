@@ -34,8 +34,13 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { GlobalProvider } from '../providers/global/global';
+import {CloudSettings, CloudModule} from '@ionic/cloud-angular';
 
-
+const cloudSettings: CloudSettings = {
+  'core': {
+    'app_id': '4a790141'
+  }
+};
 
 const firebaseConfig = {
     apiKey: "AIzaSyBi2ljKtDDP5QcxKx_KJuXyOdpightOpnE",
@@ -70,6 +75,7 @@ const firebaseConfig = {
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    CloudModule.forRoot(cloudSettings),
     IonicModule.forRoot(ConferenceApp, {}, {
       links: [
         { component: TabsPage, name: 'TabsPage', segment: 'tabs' },

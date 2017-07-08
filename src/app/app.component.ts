@@ -16,6 +16,7 @@ import { SupportPage } from '../pages/support/support';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import {Deploy} from '@ionic/cloud-angular';
 
 export interface PageInterface {
   title: string;
@@ -66,7 +67,8 @@ export class ConferenceApp {
     public confData: ConferenceData,
     public storage: Storage,
     public splashScreen: SplashScreen,
-    public toast: ToastController
+    public toast: ToastController,
+    public deploy: Deploy
   ) {
 
     events.subscribe('todo:comingsoon', () => {
@@ -111,6 +113,17 @@ export class ConferenceApp {
     this.enableMenu(true);
 
     this.listenToLoginEvents();
+    this.deploy.channel = 'production';
+    this.deploy.check().then((snapshotAvailable: boolean) => {
+      if (snapshotAvailable) {
+        const updating = this.toast.create({
+          message: 'Updating application...',
+          duration: 1300
+        });
+        updating.present();
+        this.deploy.download().then(() => this.deploy.extract()).then(() => this.deploy.load());
+      }
+    });
   }
 
   openPage(page: PageInterface) {
