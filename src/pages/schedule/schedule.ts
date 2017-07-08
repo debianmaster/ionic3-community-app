@@ -71,38 +71,19 @@ export class SchedulePage {
 
   }
 
-  goToSessionDetail(sessionData: any) {
+  goToPostDetail(post: any) {
     // go to the session detail page
     // and pass in the session data
 
-    this.navCtrl.push(SessionDetailPage, { sessionId: sessionData.id, name: sessionData.name });
+    this.navCtrl.push(SessionDetailPage, {postData:post});
   }
 
   addFavorite(slidingItem: ItemSliding, sessionData: any) {
-
-    if (this.user.hasFavorite(sessionData.name)) {
-      // woops, they already favorited it! What shall we do!?
-      // prompt them to remove it
-      this.removeFavorite(slidingItem, sessionData, 'Favorite already added');
-    } else {
-      // remember this session as a user favorite
-      this.user.addFavorite(sessionData.name);
-
-      // create an alert instance
-      let alert = this.alertCtrl.create({
-        title: 'Favorite Added',
-        buttons: [{
-          text: 'OK',
-          handler: () => {
-            // close the sliding item
-            slidingItem.close();
-          }
-        }]
-      });
-      // now present the alert on top of all other content
-      alert.present();
-    }
-
+    console.log(sessionData),slidingItem;
+    this.toastCtrl.create({
+          message: 'This feature is coming soon',
+          duration: 600
+        }).present();
   }
 
   removeFavorite(slidingItem: ItemSliding, sessionData: any, title: string) {
@@ -137,7 +118,7 @@ export class SchedulePage {
 
   openSocial(network: string, fab: FabContainer) {
     let loading = this.loadingCtrl.create({
-      content: `Posting to ${network}`,
+      content: `${network} Coming soon`,
       duration: (Math.random() * 1000) + 500
     });
     loading.onWillDismiss(() => {

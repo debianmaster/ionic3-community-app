@@ -1,19 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <ion-title *ngIf="session">{{session.name}}</ion-title>
+    <ion-title *ngIf="post">Details</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div *ngIf="session">
-    <h1>{{session.name}}</h1>
-    <h4 *ngFor="let speaker of session?.speakers">
-    {{speaker.name}}
-  </h4>
+  <div *ngIf="post">
+    <h1>{{post.title}}</h1>
     <p>
-      {{session.timeStart}} - {{session.timeEnd}}
+      {{post.tagline}} - {{post.summary}}
     </p>
-    <p>{{session.location}}</p>
-    <p>{{session.description}}</p>
+    <p>{{post.details}}</p>
   </div>
 </ion-content>

@@ -37,23 +37,14 @@
   </ion-refresher>
 
   <ion-list #scheduleList>
-    
-    <ion-item-group *ngFor="let post of posts | async">
-
-      <ion-item-divider sticky>
-        <ion-label>
-          {{post.time}}
-        </ion-label>
-      </ion-item-divider>
-
-      <ion-item-sliding *ngFor="let session of post.sessions" #slidingItem [attr.track]="session.tracks[0] | lowercase" [hidden]="session.hide">
-
-        <button ion-item (click)="goToSessionDetail(session)">
-          <h3>{{session.name}}</h3>
+      <ion-item-sliding *ngFor="let post of posts | async">
+        <button ion-item (click)="goToPostDetail(post)">
+          <h3>{{post.title}}</h3>
           <p>
-            {{session.timeStart}} &mdash;
-            {{session.timeEnd}}:
-            {{session.location}}
+            {{post.tagline}} - {{post.who}}
+          </p>
+          <p>
+            {{post.summary}}
           </p>
         </button>
 
@@ -65,11 +56,7 @@
             Remove
           </button>
         </ion-item-options>
-
       </ion-item-sliding>
-
-    </ion-item-group>
-
   </ion-list>
   <!--
   <ion-list-header [hidden]="shownSessions > 0">

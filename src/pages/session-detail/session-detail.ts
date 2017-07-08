@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavParams } from 'ionic-angular';
+import {  NavParams } from 'ionic-angular';
 
 import { ConferenceData } from '../../providers/conference-data';
 
-@IonicPage({
-  segment: 'session/:sessionId'
-})
+
 @Component({
   selector: 'page-session-detail',
   templateUrl: 'session-detail.html'
 })
 export class SessionDetailPage {
-  session: any;
+  post: any;
 
   constructor(
     public dataProvider: ConferenceData,
@@ -19,6 +17,7 @@ export class SessionDetailPage {
   ) {}
 
   ionViewWillEnter() {
-    
+    this.post=this.navParams.get("postData");
+    console.log(this.post);
   }
 }
